@@ -53,5 +53,28 @@ namespace LinqExtensionMethods.LinqExtensionClasses
 
             return true;
         }
+
+        /// <summary>
+        /// Checks if number of elements in a Collection is greater than a specified number.
+        /// </summary>
+        /// <param name="threshold">The minimum number of elements the source collection should have to return true.</param>
+        /// <returns>A Boolean value, true if the source collection has more elements than the threshold, false otherwise.</returns>
+        public static bool CountGreaterThan<T>(this IEnumerable<T> source, int threshold)
+        {
+            if (source is null)
+            {
+                throw new InvalidOperationException("Cannot compute CountGreaterThan for a null set.");
+            }
+
+            int i = 0;
+
+            foreach (var _ in source)
+            {
+                i++;
+                if (i > threshold) return true;
+            }
+
+            return false;
+        }
     }
 }
